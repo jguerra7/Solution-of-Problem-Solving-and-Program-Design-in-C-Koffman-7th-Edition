@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<math.h>
+void get_problem(int *ch)
+{
+printf("Enter the number of the problem you wish to solve.\n");
+printf("    GIVEN A MEDICAL ORDER IN              CALCULATE RATE IN\n");
+printf("(1) ml/hr & tubing drop factor              drops / min\n");
+printf("(2) 1 L for n hr                            ml / hr\n");
+printf("(3) mg/kg/hr & concentration in mg/ml       ml / hr\n");
+printf("(4) units/hr & concentration in units/ml    ml / hr\n");
+printf("(5) QUIT\n");
+scanf("%d",&(*ch));
+}
+void get_rate_drop_factor(double *rate,double *factor)
+{
+printf("Enter rate in ml/hr=>");
+scanf("%lf",&(*rate));
+printf("Enter tubing's drop factor(drops/ml)=>");
+scanf("%lf",&(*factor));
+}
+void get_kg_rate_conc(double *rate,double *wt,double *conc)
+{
+printf("Enter rate in mg/kg/hr=>");
+scanf("%lf",&(*rate));
+printf("Enter patient weight in kg=>");
+scanf("%lf",&(*wt));
+printf("Enter concentration in mg/ml=>");
+scanf("%lf",&(*conc));
+}
+void get_units_conc(double *rate,double *conc)
+{
+printf("Enter rate in units/hr=>");
+scanf("%lf",&(*rate));
+printf("Enter concentration in units/ml=>");
+scanf("%lf",&(*conc));
+}
+void fig_drops_min(int *res,double rate,double factor)
+{
+*res=round(rate*factor/60);
+}
+void fig_ml_hr(int *r,int hrs)
+{
+*r=round(1000/hrs);
+}
+void by_weight(int *r,double rate,double wt,double conc)
+{
+	*r=round(rate*wt/conc);
+}
+void by_units(int *r,double rate,double conc)
+{
+	*r=round(rate/conc);
+}
+int main(void)
+{
+
+int ch,c;
+do
+{
+get_problem(&ch);
+printf("Problem=>%d\n",ch);
+switch(ch)
+{
+case 1:
+   {
+	double rate,factor;
+	int res=0;
+	get_rate_drop_factor(&rate,&factor);
+	fig_drops_min(&res,rate,factor);
+	printf("The drop rate per minute is %d\n",res);
+	break;
+   }
+case 2:
+   {
+	int hrs,r;
+	printf("Enter number of hours=>");
+	scanf("%d",&hrs);
+	fig_ml_hr(&r,hrs);
+	printf("The rate in milliliters per hour is %d\n",r);
+	break;
+   }
+case 3:
+   {
+	double rate,wt,conc;
+	int r;
+	get_kg_rate_conc(&rate,&wt,&conc);
+	by_weight(&r,rate,wt,conc);
+	printf("The rate in milliliters per hour is %d\n",r);
+	break;
+   }
+case 4:
+   {
+	double rate,conc;
+	int r;
+	get_units_conc(&rate,&conc);
+	by_units(&r,rate,conc);
+	printf("The rate in milliliters per hour is %d\n",r);
+	break;
+   }
+case 5:
+	{
+	c=1;
+	break;
+	}
+default:
+	{
+ 	printf("Invalid choice\n");
+	}
+}
+}while(c!=1);
+return 0;
+}
