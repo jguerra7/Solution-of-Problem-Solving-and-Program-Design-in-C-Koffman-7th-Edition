@@ -42,6 +42,7 @@ int main()
 		else
 		printf("the value is not a prime number\n");
 		printf("enter 'y' to test more number or 'n' to exit\n");
+		scanf("\n%c",&c);
 	}
 	
 	return 0;
