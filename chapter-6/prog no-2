@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<math.h>
-void get_problem(int *ch)
+int get_problem()
 {
 printf("Enter the number of the problem you wish to solve.\n");
 printf("    GIVEN A MEDICAL ORDER IN              CALCULATE RATE IN\n");
@@ -9,7 +9,8 @@ printf("(2) 1 L for n hr                            ml / hr\n");
 printf("(3) mg/kg/hr & concentration in mg/ml       ml / hr\n");
 printf("(4) units/hr & concentration in units/ml    ml / hr\n");
 printf("(5) QUIT\n");
-scanf("%d",&(*ch));
+scanf("%d",&(ch));
+return ch;
 }
 void get_rate_drop_factor(double *rate,double *factor)
 {
@@ -56,7 +57,7 @@ int main(void)
 int ch,c;
 do
 {
-get_problem(&ch);
+ch=get_problem();
 printf("Problem=>%d\n",ch);
 switch(ch)
 {
